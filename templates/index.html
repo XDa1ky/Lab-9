@@ -1,35 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <title>Best store!</title>
-    <script type="text/javascript" src="/static/update.js"></script>
-    <link href="static/store.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Отзывы и звёзды</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-    <h1>Furniture store:</h1>
-    <h3>Add new product:</h3>
-    <form>
-        <div>
-            <input type="text" name="prod_name" id="prod_name">
-            <label for="prod_name">Product name</label>
-        </div>
-        <div>
-            <input type="number" name="price" id="price">
-            <label for="price">Price (rub.)</label>
-        </div>
-        <button onClick="addProduct()">Add</button>
+    <h1>Отзывы пользователей</h1>
+
+    <form method="POST" action="{{ url_for('index') }}">
+        <label>Ваш отзыв:</label><br>
+        <textarea name="text" required></textarea><br>
+
+        <label>Оценка (1‑5):</label><br>
+        <input type="number" name="rate" min="1" max="5" required><br>
+
+        <button type="submit">Добавить отзыв</button>
     </form>
-    <ul>
-        {% for product in products_list %}
-        <li>
-            <div>
-                <div>{{ product['prod_name'] }}</div>
-                <div>{{ product['price'] }} rub.</div>
-                <input value="{{product['id']}}" onChange="updateProd(this)" name="in_stock" type="checkbox" {% if product.in_stock %} checked {% endif %}>
-                <label for="in_stock">In stock</label>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+
+    <form method="POST" action="{{ url_for('clear') }}">
+        <button class="danger" type="submit">Очистить все отзывы</button>
+    </form>
+
+    <hr>
+    {% for review in reviews %}
+        <div class="review">
+            <span class="stars">{{ '★' * review.rate }}{{ '☆' * (5 - review.rate) }}</span>
+            <p>{{ review.text }}</p>
+        </div>
+    {% else %}
+        <p>Пока отзывов нет.</p>
+    {% endfor %}
+
 </body>
 </html>

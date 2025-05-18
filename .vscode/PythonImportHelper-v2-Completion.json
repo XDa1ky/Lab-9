@@ -1,0 +1,158 @@
+[
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "webbrowser",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "webbrowser",
+        "description": "webbrowser",
+        "detail": "webbrowser",
+        "documentation": {}
+    },
+    {
+        "label": "threading",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "threading",
+        "description": "threading",
+        "detail": "threading",
+        "documentation": {}
+    },
+    {
+        "label": "Review",
+        "kind": 6,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "class Review(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    text = db.Column(db.String(300), nullable=False)\n    rate = db.Column(db.Integer, nullable=False)\nwith app.app_context():\n    db.create_all()\n@app.route('/', methods=['GET', 'POST'])\ndef index():\n    if request.method == 'POST':\n        text = request.form.get('text', '').strip()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def index():\n    if request.method == 'POST':\n        text = request.form.get('text', '').strip()\n        rate = request.form.get('rate', type=int)\n        if text and 1 <= rate <= 5:\n            db.session.add(Review(text=text, rate=rate))\n            db.session.commit()\n        return redirect(url_for('index'))\n    reviews = Review.query.all()\n    return render_template('index.html', reviews=reviews)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "clear",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def clear():\n    db.session.query(Review).delete()\n    db.session.commit()\n    return redirect(url_for('index'))\n# Автоматическое открытие браузера\ndef open_browser():\n    webbrowser.open_new('http://127.0.0.1:5000')\nif __name__ == '__main__':\n    threading.Timer(1.0, open_browser).start()\n    app.run(debug=True)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "open_browser",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def open_browser():\n    webbrowser.open_new('http://127.0.0.1:5000')\nif __name__ == '__main__':\n    threading.Timer(1.0, open_browser).start()\n    app.run(debug=True)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app = Flask(__name__)\n# Ensure instance folder exists\nif not os.path.exists(app.instance_path):\n    os.makedirs(app.instance_path)\ndb_path = os.path.join(app.instance_path, 'reviews.db')\napp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\ndb = SQLAlchemy(app)\nclass Review(db.Model):\n    id = db.Column(db.Integer, primary_key=True)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "db_path",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "db_path = os.path.join(app.instance_path, 'reviews.db')\napp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\ndb = SQLAlchemy(app)\nclass Review(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    text = db.Column(db.String(300), nullable=False)\n    rate = db.Column(db.Integer, nullable=False)\nwith app.app_context():\n    db.create_all()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['SQLALCHEMY_DATABASE_URI']",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\ndb = SQLAlchemy(app)\nclass Review(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    text = db.Column(db.String(300), nullable=False)\n    rate = db.Column(db.Integer, nullable=False)\nwith app.app_context():\n    db.create_all()\n@app.route('/', methods=['GET', 'POST'])",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS']",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\ndb = SQLAlchemy(app)\nclass Review(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    text = db.Column(db.String(300), nullable=False)\n    rate = db.Column(db.Integer, nullable=False)\nwith app.app_context():\n    db.create_all()\n@app.route('/', methods=['GET', 'POST'])\ndef index():",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "db = SQLAlchemy(app)\nclass Review(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    text = db.Column(db.String(300), nullable=False)\n    rate = db.Column(db.Integer, nullable=False)\nwith app.app_context():\n    db.create_all()\n@app.route('/', methods=['GET', 'POST'])\ndef index():\n    if request.method == 'POST':",
+        "detail": "main",
+        "documentation": {}
+    }
+]

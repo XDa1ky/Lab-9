@@ -1,0 +1,41 @@
+body{
+    background-color:#f4f4f4;
+    font-family:Arial,Helvetica,sans-serif;
+    padding:20px;
+}
+h1{
+    background:#0077cc;
+    color:#fff;
+    padding:10px;
+    border-radius:6px;
+}
+textarea, input[type="number"]{
+    width:300px;
+    padding:6px;
+    margin:6px 0;
+}
+button{
+    padding:8px 12px;
+    background:#0077cc;
+    color:#fff;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+}
+button.danger{
+    background:#c62828;
+}
+button:hover{
+    opacity:0.9;
+}
+.review{
+    background:#fff;
+    padding:10px;
+    margin-bottom:10px;
+    border-left:4px solid #0077cc;
+    border-radius:4px;
+}
+.stars{
+    color:gold;
+    font-size:18px;
+}
